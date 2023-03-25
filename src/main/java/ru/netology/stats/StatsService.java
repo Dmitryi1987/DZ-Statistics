@@ -5,7 +5,6 @@ import org.jetbrains.annotations.NotNull;
 public class StatsService {
 
 
-
     public int findSumSales(long @NotNull [] sales) {
         int sum = 0; // начальное значение суммы
 
@@ -13,24 +12,20 @@ public class StatsService {
             sum += sales[i];
 
         }
-        return +sum;
+        return sum;
     }
-
 
 
     public int findAverageSales(long @NotNull [] sales) {
+        int sum = findSumSales(sales);
         int average = 0;
         if (sales.length > 0) {
-            int sum = 0;
-            for (int i = 0; i < sales.length; i++)
-            {
-                sum += sales[i];
+            for (int i = 0; i < sales.length; i++) {
+                average = sum / sales.length;
             }
-            average = sum / sales.length;
         }
         return average;
     }
-
 
 
     public int findMaxSales(long @NotNull [] sales) {
@@ -49,7 +44,6 @@ public class StatsService {
     }
 
 
-
     public int findMinSales(long @NotNull [] sales) {
 
         int minMonth = 0; // номер месяца с минимальными продажами среди просмотренных ранее
@@ -65,22 +59,13 @@ public class StatsService {
     }
 
 
-
     public int findSalesBelowAverage(long @NotNull [] sales) {
 
-        int average = 0;
-        if (sales.length > 0) {
-            int sum = 0;
-            for (int i = 0; i < sales.length; i++)
-            {
-                sum += sales[i];
-            }
-            average = sum / (sales.length);
-        }
+        int average = findAverageSales(sales);
         int below = 0;
         for (int i = 0; i < sales.length; i++) {
-            if ( average > sales[i])
-            below++;
+            if (average > sales[i])
+                below++;
         }
         return below;
     }
@@ -88,15 +73,7 @@ public class StatsService {
 
     public int findSalesHigherAverage(long @NotNull [] sales) {
 
-        int average = 0;
-        if (sales.length > 0) {
-            int sum = 0;
-            for (int i = 0; i < sales.length; i++)
-            {
-                sum += sales[i];
-            }
-            average = sum / (sales.length);
-        }
+        int average = findAverageSales(sales);
         int higher = 0;
         for (int i = 0; i < sales.length; i++) {
             if (sales[i] > average)
@@ -104,7 +81,5 @@ public class StatsService {
         }
         return higher;
     }
-
-
 }
 
